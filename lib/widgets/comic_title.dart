@@ -4,7 +4,7 @@ import '../bloc/galeri/galeri_models.dart';
 class ComicTile extends StatelessWidget {
   final WisataJson wisata;
 
-  const ComicTile({Key? key, required this.wisata}) : super(key: key);
+  const ComicTile({super.key, required this.wisata});
 
   @override
   Widget build(BuildContext context) {

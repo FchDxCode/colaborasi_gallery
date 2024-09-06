@@ -4,7 +4,7 @@ import '../bloc/login/login_bloc.dart';
 import '../bloc/login/login_event.dart';
 
 class FormContentWidget extends StatefulWidget {
-  const FormContentWidget({Key? key}) : super(key: key);
+  const FormContentWidget({super.key});
 
   @override
   State<FormContentWidget> createState() => _FormContentWidgetState();

@@ -3,7 +3,7 @@ import '../widgets/form_register.dart';
 import '../widgets/logo.dart';
 
 class RegisterScreen extends StatelessWidget {
-  const RegisterScreen({Key? key}) : super(key: key);
+  const RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,9 +12,9 @@ class RegisterScreen extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: isSmallScreen
-            ? Column(
+            ? const Column(
                 mainAxisSize: MainAxisSize.min,
-                children: const [
+                children: [
                   LogoWidget(),
                   RegisterFormWidget(),
                 ],
@@ -22,8 +22,8 @@ class RegisterScreen extends StatelessWidget {
             : Container(
                 padding: const EdgeInsets.all(32.0),
                 constraints: const BoxConstraints(maxWidth: 800),
-                child: Row(
-                  children: const [
+                child: const Row(
+                  children: [
                     Expanded(child: LogoWidget()),
                     Expanded(
                       child: Center(child: RegisterFormWidget()),

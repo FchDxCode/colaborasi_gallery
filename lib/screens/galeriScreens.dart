@@ -7,6 +7,8 @@ import '../bloc/galeri/galeri_state.dart';
 import '../widgets/comic_title.dart';
 
 class GalleryScreen extends StatelessWidget {
+  const GalleryScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,12 +17,12 @@ class GalleryScreen extends StatelessWidget {
         builder: (context, state) {
           if (state is GalleryInitial) {
             BlocProvider.of<GalleryBloc>(context).add(FetchGallery());
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (state is GalleryLoading) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (state is GalleryLoaded) {
             return GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: 0.75,
               ),

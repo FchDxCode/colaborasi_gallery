@@ -16,6 +16,8 @@ import '../bloc/agenda/agenda_bloc.dart';
 import '../bloc/agenda/agenda_repo.dart';
 
 class TabScreen extends StatelessWidget {
+  const TabScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -23,16 +25,16 @@ class TabScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            icon: Icon(Icons.menu), // Ikon garis tiga
+            icon: const Icon(Icons.menu), // Ikon garis tiga
             onPressed: () {
               // Aksi saat ikon ditekan, biasanya membuka Drawer
               Scaffold.of(context).openDrawer();
             },
           ),
-          title: Text('SMK NEGERI 4 BOGOR'),
+          title: const Text('SMK NEGERI 4 BOGOR'),
           centerTitle: true, // Agar judul berada di tengah
           flexibleSpace: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -46,8 +48,7 @@ class TabScreen extends StatelessWidget {
           child: ListView(
             padding: EdgeInsets.zero,
             children: <Widget>[
-              DrawerHeader(
-                child: Text('Menu'),
+              const DrawerHeader(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
@@ -55,10 +56,11 @@ class TabScreen extends StatelessWidget {
                     colors: [Colors.blue, Colors.deepPurple], // Warna gradasi di drawer header
                   ),
                 ),
+                child: Text('Menu'),
               ),
               ListTile(
-                leading: Icon(Icons.home),
-                title: Text('Home'),
+                leading: const Icon(Icons.home),
+                title: const Text('Home'),
                 onTap: () {
                   Navigator.pop(context); // Close the drawer
                 },
@@ -85,14 +87,14 @@ class TabScreen extends StatelessWidget {
           ],
         ),
         bottomNavigationBar: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [Colors.blue, Colors.deepPurple], // Gradasi pada tab bar bawah
             ),
           ),
-          child: TabBar(
+          child: const TabBar(
             tabs: [
               Tab(icon: Icon(Icons.home), text: 'Home'),
               Tab(icon: Icon(Icons.info), text: 'Info'),
