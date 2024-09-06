@@ -75,8 +75,8 @@ class TabScreen extends StatelessWidget {
               child: InfoScreens(),
             ),
             BlocProvider(
-              create: (context) => GaleriBloc(repository: GaleriRepository()),
-              child: GaleriScreens(),
+              create: (context) => GalleryBloc(repository: GalleryRepository()),
+              child: GalleryScreen(),
             ),
             BlocProvider(
               create: (context) => AgendaBloc(repository: AgendaRepository()),
