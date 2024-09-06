@@ -40,6 +40,8 @@ dependencies:
   google_fonts: ^6.2.1
   path_provider: ^2.1.4
   fetch_api: ^2.2.0
+  equatable: ^2.0.5
+  flutter_bloc: ^8.1.6
 
 dev_dependencies:
   flutter_test:

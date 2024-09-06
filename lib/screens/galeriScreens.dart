@@ -1,46 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import '../bloc/galeri/galeri_repo.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../bloc/galeri/galeri_bloc.dart';
+import '../bloc/galeri/galeri_event.dart';
+import '../bloc/galeri/galeri_state.dart';
 
 class GaleriScreens extends StatelessWidget {
-  Future<List<WisataJson>> fetchWisata() async {
-    final response =
-        await http.get(Uri.parse('https://ws.jakarta.go.id/gateway/DataPortalSatuDataJakarta/1.0/satudata?kategori=dataset&tipe=detail&url=indeks-kepuasan-layanan-penunjang-urusan-pemerintahan-daerah-pada-dinas-pariwisata-dan-ekonomi-kreatif'));
-    if (response.statusCode == 200) {
-      final List<dynamic> data = json.decode(response.body)['data'];
-      return data.map((wisata) => WisataJson.fromJson(wisata)).toList();
-    } else {
-      throw Exception('Failed to load');
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('User List'),
       ),
-      body: FutureBuilder<List<WisataJson>?>(
-        future: fetchWisata(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            final wisatas = snapshot.data;
+      body: BlocBuilder<GaleriBloc, GaleriState>(
+        builder: (context, state) {
+          if (state is GaleriInitial) {
+            BlocProvider.of<GaleriBloc>(context).add(FetchGaleri());
+            return Center(child: CircularProgressIndicator());
+          } else if (state is GaleriLoading) {
+            return Center(child: CircularProgressIndicator());
+          } else if (state is GaleriLoaded) {
             return ListView.builder(
-              itemCount: wisatas?.length ?? 0,
+              itemCount: state.wisatas.length,
               itemBuilder: (context, index) {
-                final wisata = wisatas?[index];
+                final wisata = state.wisatas[index];
                 return ListTile(
-                  title: Text(wisata?.periodeData ?? ''),
-                  subtitle: Text(wisata?.triwulan1 ?? ''),
+                  title: Text(wisata.periodeData ?? ''),
+                  subtitle: Text(wisata.triwulan1 ?? ''),
                 );
               },
             );
-          } else if (snapshot.hasError) {
-            return Text('Error: ${snapshot.error}');
-          } else {
-            return Center(child: CircularProgressIndicator());
+          } else if (state is GaleriError) {
+            return Center(child: Text('Error: ${state.message}'));
           }
+          return Container();
         },
       ),
     );

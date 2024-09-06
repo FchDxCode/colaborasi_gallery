@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
-import '../screens/berandaScreens.dart';
-import '../screens/infoScreens.dart';
-import '../screens/galeriScreens.dart';
-import '../screens/agendaScreens.dart';
+import 'berandaScreens.dart';
+import 'infoScreens.dart';
+import 'galeriScreens.dart';
+import 'agendaScreens.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../bloc/galeri/galeri_bloc.dart';
+import '../bloc/galeri/galeri_repo.dart';
+
 
 class TabScreen extends StatelessWidget {
   @override
@@ -26,7 +31,10 @@ class TabScreen extends StatelessWidget {
           children: [
             BerandaScreens(),
             InfoScreens(),
-            GaleriScreens(),
+            BlocProvider(
+              create: (context) => GaleriBloc(repository: GaleriRepository()),
+              child: GaleriScreens(),
+            ),
             AgendaScreens(),
           ],
         ),
