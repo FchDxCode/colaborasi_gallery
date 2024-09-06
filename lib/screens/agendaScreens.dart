@@ -32,35 +32,65 @@ class AgendaScreens extends StatelessWidget {
                     border: Border.all(color: Colors.grey), // Add border
                     borderRadius: BorderRadius.circular(8.0), // Rounded corners
                   ),
-                  child: Stack(
-                    children: [
-                      ListTile(
-                        title: Text(
-                          wisata.Judul ?? '',
-                          style: TextStyle(
-                              color: Colors.white), // White text for contrast
+                  child: Padding(
+                    padding: const EdgeInsets.all(
+                        8.0), // Add padding inside the container
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Logo di sebelah kiri
+                        Container(
+                          margin: EdgeInsets.only(
+                              right: 16.0), // Add space between logo and text
+                          child: Icon(
+                            Icons.event, // Using a built-in agenda icon
+                            size: 40.0, // Size of the logo
+                            color: Colors.white,
+                          ),
                         ),
-                        subtitle: Text(
-                          wisata.Deskripsi ?? '',
-                          style: TextStyle(
-                              color:
-                                  Colors.white), // White subtitle for contrast
-                        ),
-                      ),
-                      Positioned(
-                        bottom: 8.0,
-                        right: 16.0,
-                        child: Text(
-                          wisata.Tanggal ??
-                              'Lokasi tidak tersedia', // New location field
-                          style: TextStyle(
-                              color:
-                                  Colors.white70, // Slightly transparent white
-                              fontSize: 12.0 // Smaller font size
+                        // Bagian teks (judul, deskripsi, dan tanggal)
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // Judul
+                              Text(
+                                wisata.Judul ?? '',
+                                style: TextStyle(
+                                  color:
+                                      Colors.white, // White text for contrast
+                                  fontSize: 20.0, // Make title text larger
+                                  fontWeight: FontWeight.bold, // Bold text
+                                ),
                               ),
+                              SizedBox(
+                                  height:
+                                      4.0), // Add space between title and description
+                              // Deskripsi
+                              Text(
+                                wisata.Deskripsi ?? '',
+                                style: TextStyle(
+                                  color: Colors
+                                      .white, // White subtitle for contrast
+                                ),
+                              ),
+                              SizedBox(
+                                  height:
+                                      8.0), // Add space between description and date
+                              // Tanggal
+                              Text(
+                                wisata.Tanggal ?? 'Lokasi tidak tersedia',
+                                style: TextStyle(
+                                  color: Colors
+                                      .white70, // Slightly transparent white
+                                  fontSize: 12.0, // Smaller font size for date
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 );
               },
