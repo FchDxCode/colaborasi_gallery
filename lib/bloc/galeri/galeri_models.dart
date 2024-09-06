@@ -1,11 +1,16 @@
+
 class WisataJson {
-  final String periodeData;
-  final String triwulan1;
-  WisataJson({ required this.periodeData, required this.triwulan1});
+  final String imageUrl;
+  final String titleData;
+  final String descData;
+
+  WisataJson({required this.imageUrl, required this.titleData, required this.descData});
+
   factory WisataJson.fromJson(Map<String, dynamic> json) {
     return WisataJson(
-      periodeData: json['periode_data'],
-      triwulan1: json['triwulan'],
+      imageUrl: json['img'] ?? '',
+      titleData: json['title'] ?? '',
+      descData: json['desc'] ?? '',
     );
   }
 }
