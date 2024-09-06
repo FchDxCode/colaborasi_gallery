@@ -66,41 +66,47 @@ class InfoScreens extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: Stack(
-                        children: [
-                          // Bagian ListTile
-                          ListTile(
-                            contentPadding: EdgeInsets.all(16), // Padding dalam ListTile
-                            title: Text(
-                              wisata.periodeData ?? '',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.blueAccent, // Warna teks judul
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0), // Padding dalam Container
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start, // Menyusun teks ke kiri
+                          children: [
+                            ListTile(
+                              contentPadding: EdgeInsets.zero, // Hilangkan padding default ListTile
+                              title: Text(
+                                wisata.periodeData ?? '',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.blueAccent, // Warna teks judul
+                                ),
+                              ),
+                              subtitle: Padding(
+                                padding: const EdgeInsets.only(bottom: 8.0), // Padding antara subtitle dan teks bawah
+                                child: Text(
+                                  wisata.triwulan1 ?? '',
+                                  style: TextStyle(
+                                    color: Colors.black54, // Warna teks pertama
+                                  ),
+                                ),
+                              ),
+                              leading: Icon(Icons.info, color: Colors.blue), // Ikon di bagian kiri
+                              trailing: Icon(Icons.arrow_forward_ios, color: Colors.blue), // Ikon di bagian kanan
+                            ),
+                            Align(
+                              alignment: Alignment.bottomRight, // Tempatkan teks di kanan bawah
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 8.0), // Jarak antara teks dan subtitle di atasnya
+                                child: Text(
+                                  wisata.nilai1 ?? '',
+                                  style: TextStyle(
+                                    color: Colors.grey, // Warna teks abu-abu
+                                    fontSize: 14,
+                                  ),
+                                ),
                               ),
                             ),
-                            subtitle: Text(
-                              wisata.triwulan1 ?? '',
-                              style: TextStyle(
-                                color: Colors.black54, // Warna teks pertama
-                              ),
-                            ),
-                            leading: Icon(Icons.info, color: Colors.blue), // Ikon di bagian kiri
-                            trailing: Icon(Icons.arrow_forward_ios, color: Colors.blue), // Ikon di bagian kanan
-                          ),
-                          
-                          // Posisi untuk nilai1 di pojok kanan bawah
-                          Positioned(
-                            bottom: 10,
-                            right: 16,
-                            child: Text(
-                              wisata.nilai1 ?? '',
-                              style: TextStyle(
-                                color: Colors.grey, // Warna teks abu-abu
-                                fontSize: 14,
-                              ),
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   );
