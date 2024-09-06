@@ -13,9 +13,9 @@ class WisataJson {
   // Factory method updated to handle lokasi
   factory WisataJson.fromJson(Map<String, dynamic> json) {
     return WisataJson(
-      Judul: json['periode_data'],
-      Deskripsi: json['triwulan'],
-      Tanggal: json['jenis_layanan'], // Fetching lokasi from JSON
+      Judul: json['title'],
+      Deskripsi: json['desc'],
+      Tanggal: json['created_at'], // Fetching lokasi from JSON
     );
   }
 }
