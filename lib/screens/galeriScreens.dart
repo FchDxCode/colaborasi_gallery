@@ -1,35 +1,36 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/galeri/galeri_bloc.dart';
 import '../bloc/galeri/galeri_event.dart';
 import '../bloc/galeri/galeri_state.dart';
+import '../widgets/comic_title.dart';
 
-class GaleriScreens extends StatelessWidget {
+class GalleryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('User List'),
-      ),
-      body: BlocBuilder<GaleriBloc, GaleriState>(
+      
+      body: BlocBuilder<GalleryBloc, GalleryState>(
         builder: (context, state) {
-          if (state is GaleriInitial) {
-            BlocProvider.of<GaleriBloc>(context).add(FetchGaleri());
+          if (state is GalleryInitial) {
+            BlocProvider.of<GalleryBloc>(context).add(FetchGallery());
             return Center(child: CircularProgressIndicator());
-          } else if (state is GaleriLoading) {
+          } else if (state is GalleryLoading) {
             return Center(child: CircularProgressIndicator());
-          } else if (state is GaleriLoaded) {
-            return ListView.builder(
+          } else if (state is GalleryLoaded) {
+            return GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 0.75,
+              ),
               itemCount: state.wisatas.length,
               itemBuilder: (context, index) {
                 final wisata = state.wisatas[index];
-                return ListTile(
-                  title: Text(wisata.periodeData ?? ''),
-                  subtitle: Text(wisata.triwulan1 ?? ''),
-                );
+                return ComicTile(wisata: wisata);
               },
             );
-          } else if (state is GaleriError) {
+          } else if (state is GalleryError) {
             return Center(child: Text('Error: ${state.message}'));
           }
           return Container();
