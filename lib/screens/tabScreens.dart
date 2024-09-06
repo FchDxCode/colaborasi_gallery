@@ -3,13 +3,12 @@ import 'berandaScreens.dart';
 import 'infoScreens.dart';
 import 'galeriScreens.dart';
 import 'agendaScreens.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/galeri/galeri_bloc.dart';
 import '../bloc/galeri/galeri_repo.dart';
 
 
-class TabScreen extends StatelessWidget {
+class TabScreens extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(

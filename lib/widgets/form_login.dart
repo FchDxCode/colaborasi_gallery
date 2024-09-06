@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../bloc/login/login_bloc.dart';
+import '../bloc/login/login_event.dart';
 
 class FormContentWidget extends StatefulWidget {
   const FormContentWidget({Key? key}) : super(key: key);
@@ -12,6 +15,8 @@ class _FormContentWidgetState extends State<FormContentWidget> {
   bool _rememberMe = false;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -24,19 +29,17 @@ class _FormContentWidgetState extends State<FormContentWidget> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextFormField(
+              controller: _emailController,
               validator: (value) {
-                // add email validation
                 if (value == null || value.isEmpty) {
                   return 'Please enter some text';
                 }
-
                 bool emailValid = RegExp(
                         r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                     .hasMatch(value);
                 if (!emailValid) {
                   return 'Please enter a valid email';
                 }
-
                 return null;
               },
               decoration: const InputDecoration(
@@ -48,11 +51,11 @@ class _FormContentWidgetState extends State<FormContentWidget> {
             ),
             _gap(),
             TextFormField(
+              controller: _passwordController,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter some text';
                 }
-
                 if (value.length < 6) {
                   return 'Password must be at least 6 characters';
                 }
@@ -60,20 +63,21 @@ class _FormContentWidgetState extends State<FormContentWidget> {
               },
               obscureText: !_isPasswordVisible,
               decoration: InputDecoration(
-                  labelText: 'Password',
-                  hintText: 'Enter your password',
-                  prefixIcon: const Icon(Icons.lock_outline_rounded),
-                  border: const OutlineInputBorder(),
-                  suffixIcon: IconButton(
-                    icon: Icon(_isPasswordVisible
-                        ? Icons.visibility_off
-                        : Icons.visibility),
-                    onPressed: () {
-                      setState(() {
-                        _isPasswordVisible = !_isPasswordVisible;
-                      });
-                    },
-                  )),
+                labelText: 'Password',
+                hintText: 'Enter your password',
+                prefixIcon: const Icon(Icons.lock_outline_rounded),
+                border: const OutlineInputBorder(),
+                suffixIcon: IconButton(
+                  icon: Icon(_isPasswordVisible
+                      ? Icons.visibility_off
+                      : Icons.visibility),
+                  onPressed: () {
+                    setState(() {
+                      _isPasswordVisible = !_isPasswordVisible;
+                    });
+                  },
+                ),
+              ),
             ),
             _gap(),
             CheckboxListTile(
@@ -106,7 +110,12 @@ class _FormContentWidgetState extends State<FormContentWidget> {
                 ),
                 onPressed: () {
                   if (_formKey.currentState?.validate() ?? false) {
-                    /// do something
+                    BlocProvider.of<LoginBloc>(context).add(
+                      LoginButtonPressed(
+                        email: _emailController.text,
+                        password: _passwordController.text,
+                      ),
+                    );
                   }
                 },
               ),
