@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 
-abstract class GaleriEvent extends Equatable {
-  const GaleriEvent();
+abstract class GalleryEvent extends Equatable {
+  const GalleryEvent();
 
   @override
   List<Object> get props => [];
 }
 
-class FetchGaleri extends GaleriEvent {}
+class FetchGallery extends GalleryEvent {}
